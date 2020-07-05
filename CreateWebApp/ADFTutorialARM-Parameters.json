@@ -1,0 +1,24 @@
+{  
+    "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion":"1.0.0.0",
+    "parameters":{  
+        "dataFactoryName":{  
+            "value":"ARMCreatedDataFactory"
+        },
+        "dataFactoryLocation":{  
+            "value":"East US"
+        },
+        "storageAccountName":{  
+            "value":"storageinternakash"
+        },
+        "storageAccountKey":{  
+            "value":"BaFpZ/8RdYYH69WVRAiXDZwHHYMsIeFn2O6+UQiqaDvqghFktSDA+HkYQmBB63nV9IXhXRwYcpxBJJDvR3vkEA=="
+        },
+        "triggerStartTime":{  
+            "value":"2020-09-08T11:00:00"
+        },
+        "triggerEndTime":{  
+            "value":"2020-09-08T14:00:00"
+        }
+    }
+}
