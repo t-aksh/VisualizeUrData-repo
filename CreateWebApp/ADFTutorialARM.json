@@ -51,76 +51,6 @@
                 "type":"SystemAssigned"
             },
           "resources": [
-            /*{  
-                    "name":"[concat(parameters('dataFactoryName'), '/ArmtemplateStorageLinkedService')]",
-                    "type":"Microsoft.DataFactory/factories/linkedServices",
-                    "apiVersion":"2018-06-01",
-                    "properties":{  
-                        "annotations":[  
-
-                        ],
-                        "type":"AzureBlobStorage",
-                        "typeProperties":{  
-                            "connectionString":"[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',parameters('storageAccountKey'))]"
-                        }
-                    },
-                    "dependsOn":[  
-                        "[parameters('dataFactoryName')]"
-                    ]
-                },
-                {  
-                    "name":"[concat(parameters('dataFactoryName'), '/ArmtemplateTestDatasetIn')]",
-                    "type":"Microsoft.DataFactory/factories/datasets",
-                    "apiVersion":"2018-06-01",
-                    "properties":{  
-                        "linkedServiceName":{  
-                            "referenceName":"ArmtemplateStorageLinkedService",
-                            "type":"LinkedServiceReference"
-                        },
-                        "annotations":[  
-
-                        ],
-                        "type":"Binary",
-                        "typeProperties":{  
-                            "location":{  
-                                "type":"AzureBlobStorageLocation",
-                                "fileName":"emp.txt",
-                                "folderPath":"input",
-                                "container":"adftutorial"
-                            }
-                        }
-                    },
-                    "dependsOn":[  
-                        "[parameters('dataFactoryName')]",
-                        "[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
-                    ]
-                },
-                {  
-                    "name":"[concat(parameters('dataFactoryName'), '/ArmtemplateTestDatasetOut')]",
-                    "type":"Microsoft.DataFactory/factories/datasets",
-                    "apiVersion":"2018-06-01",
-                    "properties":{  
-                        "linkedServiceName":{  
-                            "referenceName":"ArmtemplateStorageLinkedService",
-                            "type":"LinkedServiceReference"
-                        },
-                        "annotations":[  
-
-                        ],
-                        "type":"Binary",
-                        "typeProperties":{  
-                            "location":{  
-                                "type":"AzureBlobStorageLocation",
-                                "folderPath":"output",
-                                "container":"adftutorial"
-                            }
-                        }
-                    },
-                    "dependsOn":[  
-                        "[parameters('dataFactoryName')]",
-                        "[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
-                    ]
-                },*/
             {
               "name": "[concat(parameters('dataFactoryName'), '/ArmtemplateSampleCopyPipeline')]",
               "type": "Microsoft.DataFactory/factories/pipelines",
@@ -190,43 +120,7 @@
               ]
             },
             {
-              "name": "[concat(parameters('dataFactoryName'), '/ArmTemplateTestTrigger')]",
-              "type": "Microsoft.DataFactory/factories/triggers",
-              "apiVersion": "2018-06-01",
-              "properties": {
-                "annotations": [
-
-                ],
-                "runtimeState": "Started",
-                "pipelines": [
-                  {
-                    "pipelineReference": {
-                      "referenceName": "ArmtemplateSampleCopyPipeline",
-                      "type": "PipelineReference"
-                    },
-                    "parameters": {
-
-                    }
-                  }
-                ],
-                "type": "ScheduleTrigger",
-                "typeProperties": {
-                  "recurrence": {
-                    "frequency": "Hour",
-                    "interval": 1,
-                    "startTime": "[parameters('triggerStartTime')]",
-                    "endTime": "[parameters('triggerEndTime')]",
-                    "timeZone": "UTC"
-                  }
-                }
-              },
-              "dependsOn": [
-                "[parameters('dataFactoryName')]",
-                "[concat(variables('factoryId'), '/pipelines/ArmtemplateSampleCopyPipeline')]"
-              ]
-            },
-            {
-              "name": "[concat(parameters('dataFactoryName'), '/ArmtemplateSampleCopyPipeline')]",
+              "name": "[concat(parameters('dataFactoryName'), '/FaultDomainService')]",
               "type": "Microsoft.DataFactory/factories/pipelines",
               "apiVersion": "2018-06-01",
               "properties": {
