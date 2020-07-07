@@ -16,10 +16,12 @@ steps:
     script: |
       git config --global user.email "t-aksh@microsoft.com"
       git config --global user.name "Akash Sharma"
-      git reset --soft HEAD~1
-      Write-Host "git reset --soft HEAD~1"
-      Write-Host "git status"
-      $ChangedFiles = $(git status --porcelain)
+      $contents = Get-Content -Raw -Path CreateWebApp/Config.json | ConvertFrom-Json
+      $Endpoints = $contents[0].resources
+      foreach ($i in $Endpoints)
+      {
+        Write-Host $i.EndPoint
+      }
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
