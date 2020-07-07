@@ -3,6 +3,10 @@
     {
       "EndPoint": "Endpoint1",
       "Schema": "Schema1"
+    },
+    {
+      "EndPoint": "Endpoint2",
+      "Schema": "Schema2"
     }
   ]
 }
