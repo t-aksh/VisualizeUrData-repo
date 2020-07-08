@@ -258,13 +258,13 @@
           ]
         },
         {
-          "name": "[concat(parameters('dataFactoryName'), '/NameChangedPipeline')]",
+          "name": "[concat(parameters('dataFactoryName'), '/FaultDomainPipeline')]",
           "type": "Microsoft.DataFactory/factories/pipelines",
           "apiVersion": "2018-06-01",
           "properties": {
             "activities": [
               {
-                "name": "FDActivity",
+                "name": "Activity_Name_Changed",
                 "type": "Copy",
                 "dependsOn": [
 
