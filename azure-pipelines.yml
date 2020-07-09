@@ -15,10 +15,11 @@ steps:
     targetType: 'inline'
     script: |
       Install-Module -Name Az -AllowClobber -Scope CurrentUser -Force
-      $tenantId = (Get-AzContext).Tenant.Id
+      #$tenantId = (Get-AzContext).Tenant.Id
       #$sp.ApplicationId = '6a9d59a2-42b9-496f-b6e4-4ec3c2942ae6'
       #$sp.Secret
 
+      $tenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
       $userPassword = "Seet3z~DELAA__2siBl46We-n_zS9M_JUL"
       $userPassword = ConvertTo-SecureString -String $userPassword -AsPlainText -Force
 
