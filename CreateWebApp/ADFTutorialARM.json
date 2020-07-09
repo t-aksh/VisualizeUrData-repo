@@ -122,13 +122,13 @@
           ]
         },
         {
-          "name": "[concat(parameters('dataFactoryName'), '/MyPipeline')]",
+          "name": "[concat(parameters('dataFactoryName'), '/ArmtemplateSampleCopyPipeline')]",
           "type": "Microsoft.DataFactory/factories/pipelines",
           "apiVersion": "2018-06-01",
           "properties": {
             "activities": [
               {
-                "name": "MyCopyActivity",
+                "name": "NewActivity",
                 "type": "Copy",
                 "dependsOn": [
 
