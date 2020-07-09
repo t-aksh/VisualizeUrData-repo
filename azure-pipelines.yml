@@ -18,6 +18,14 @@ steps:
       git config --global user.name "Akash Sharma"
       $contents = Get-Content -Raw -Path CreateWebApp/Config.json | ConvertFrom-Json
       $ARMtemplate = Get-Content -Raw -Path CreateWebApp/ADFTutorialARM.json | ConvertFrom-Json
+
+      $DataFactoryPipeline = @"
+      {
+        "name": "PushedPipeline",
+        "type": "Microsoft.DataFactory/factories/pipelines"
+      }
+      "@
+      
       $contents[0].resources[0].EndPoint = "Changed EndPoint"
       $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
       $ARMtemplate.resources.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
