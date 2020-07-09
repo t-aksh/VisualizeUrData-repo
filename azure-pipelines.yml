@@ -18,6 +18,7 @@ steps:
       git config --global user.name "Akash Sharma"
       $contents = Get-Content -Raw -Path CreateWebApp/Config.json | ConvertFrom-Json
       $ARMtemplate = Get-Content -Raw -Path CreateWebApp/ADFTutorialARM.json | ConvertFrom-Json
+      $ARMParameters = Get-Content -Raw -Path CreateWebApp/ADFTutorialARM-Parameters.json | ConvertFrom-Json
 
       $DataFactoryPipeline = @"
       {
@@ -30,8 +31,4 @@ steps:
       $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
       #$ARMtemplate.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
 
-      git add CreateWebApp/Config.json
-      git commit -m "Update ARM"
-      git remote rm origin
-      git remote add origin https://github.com/t-aksh/VizUrDataRepo
-      git push -u origin HEAD:master
+      New-AzResourceGroupDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile $ARMtemplate -TemplateParameterFile $ARMParameters
