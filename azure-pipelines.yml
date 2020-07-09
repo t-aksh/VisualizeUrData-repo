@@ -17,11 +17,9 @@ steps:
       git config --global user.email "t-aksh@microsoft.com"
       git config --global user.name "Akash Sharma"
       $contents = Get-Content -Raw -Path CreateWebApp/Config.json | ConvertFrom-Json
-      $Endpoints = $contents[0].resources
-      foreach ($i in $Endpoints)
-      {
-        Write-Host $i.EndPoint
-      }
+      $contents[0].resources[0].EndPoint = "Changed EndPoint"
+      $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
+
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
