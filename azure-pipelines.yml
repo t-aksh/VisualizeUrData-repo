@@ -31,4 +31,4 @@ steps:
       $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
       #$ARMtemplate.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
 
-      New-AzResourceGroupDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile $ARMtemplate -TemplateParameterFile $ARMParameters
+      New-AzResourceGroupDeployment -Name MyARMDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile CreateWebApp/ADFTutorialARM.json -TemplateParameterFile CreateWebApp/ADFTutorialARM-Parameters.json
