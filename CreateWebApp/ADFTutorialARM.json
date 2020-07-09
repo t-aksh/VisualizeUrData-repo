@@ -196,7 +196,7 @@
           "properties": {
             "activities": [
               {
-                "name": "JustCreatedPipelineActivity",
+                "name": "NewNameActivity",
                 "type": "Copy",
                 "dependsOn": [
 
