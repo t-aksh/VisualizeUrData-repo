@@ -28,7 +28,7 @@ steps:
       
       $contents[0].resources[0].EndPoint = "Changed EndPoint"
       $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
-      $ARMtemplate.resources.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
+      $ARMtemplate.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
