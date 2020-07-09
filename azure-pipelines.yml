@@ -14,10 +14,23 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      Install-Module -Name Az -AllowClobber -Scope CurrentUser -Force
+      #$tenantId = (Get-AzContext).Tenant.Id
+      #$sp.ApplicationId = '6a9d59a2-42b9-496f-b6e4-4ec3c2942ae6'
+      #$sp.Secret
+
+      $tenantId = "72f988bf-86f1-41af-91ab-2d7cd011db47";
+      $userPassword = "Seet3z~DELAA__2siBl46We-n_zS9M_JUL"
+      $userPassword = ConvertTo-SecureString -String $userPassword -AsPlainText -Force
+
+      $pscredential = New-Object -TypeName System.Management.Automation.PSCredential("6a9d59a2-42b9-496f-b6e4-4ec3c2942ae6", $userPassword)
+      Connect-AzAccount -ServicePrincipal -Credential $pscredential -Tenant $tenantId
+
       git config --global user.email "t-aksh@microsoft.com"
       git config --global user.name "Akash Sharma"
       $contents = Get-Content -Raw -Path CreateWebApp/Config.json | ConvertFrom-Json
       $ARMtemplate = Get-Content -Raw -Path CreateWebApp/ADFTutorialARM.json | ConvertFrom-Json
+      $ARMParameters = Get-Content -Raw -Path CreateWebApp/ADFTutorialARM-Parameters.json | ConvertFrom-Json
 
       $DataFactoryPipeline = @"
       {
@@ -28,18 +41,6 @@ steps:
       
       $contents[0].resources[0].EndPoint = "Changed EndPoint"
       $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
-      $ARMtemplate.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
+      #$ARMtemplate.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
 
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'VizUrDataRepoServiceConnection'
-    subscriptionId: 'a4a2cee9-4034-4c0c-853b-6f64c2f0a278'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'Intern_Akash_RG'
-    location: 'East US'
-    templateLocation: 'Linked artifact'
-    csmFile: 'CreateWebApp/ADFTutorialARM.json'
-    csmParametersFile: 'CreateWebApp/ADFTutorialARM-Parameters.json'
-    deploymentMode: 'Incremental'
-    deploymentName: 'DeployPipelineTemplate'
+      New-AzResourceGroupDeployment -Name MyARMDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile CreateWebApp/ADFTutorialARM.json -TemplateParameterFile CreateWebApp/ADFTutorialARM-Parameters.json
