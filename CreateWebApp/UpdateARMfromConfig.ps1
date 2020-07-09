@@ -5,7 +5,7 @@ $ARMtemplate = ( Get-Content -Raw -Path C:\Users\t-aksh\Documents\Internship_pro
 ConvertFrom-Json -depth 32 )
 $ARMResources = $ARMtemplate.resources.resources
 
-Write-Host "Done"
+#Write-Host "Done"
 #set-content 'C:\Users\t-aksh\Documents\Internship_project\VizUrDataRepo\CreateWebApp\ADFTutorialARM.json'
 #$SomeRandomVar = $ARMtemplate.resources.resources
 #Write-Host $SomeRandomVar
@@ -17,7 +17,9 @@ $DataFactoryPipeline =@"
 	}
 "@
 
-#$ARMtemplate | ConvertTo-Json | set-content 'C:\Users\t-aksh\Documents\Internship_project\VizUrDataRepo\CreateWebApp\ADFTutorialARM.json'
+$ARMtemplate.resources.resources[0].name = "Random"
+Write-Host $ARMtemplate.resources.resources[0].name
 
+#$JSON.Places.Places | Where{$_.name -eq 'Room 1'} | ForEach{$_.CandyTypesPresent.candies += 'bubblegum'}
 
-New-AzResourceGroupDeployment -Name MyARMDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile C:\Users\t-aksh\Documents\Internship_project\VizUrDataRepo\CreateWebApp\ADFTutorialARM.json -TemplateParameterFile C:\Users\t-aksh\Documents\Internship_project\VizUrDataRepo\CreateWebApp\ADFTutorialARM-Parameters.json
+$ARMtemplate | ConvertTo-Json -depth 100 | set-content 'C:\Users\t-aksh\Documents\Internship_project\VizUrDataRepo\CreateWebApp\ADFTutorialARM.json'
