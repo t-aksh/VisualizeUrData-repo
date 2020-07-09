@@ -29,3 +29,9 @@ steps:
       $contents[0].resources[0].EndPoint = "Changed EndPoint"
       $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
       #$ARMtemplate.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
+
+      git add CreateWebApp/Config.json
+      git commit -m "Update ARM"
+      git remote rm origin
+      git remote add origin https://github.com/t-aksh/VizUrDataRepo
+      git push -u origin HEAD:master
