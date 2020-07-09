@@ -1,7 +1,7 @@
 {
   "resources": [
     {
-      "EndPoint": "Endpoint1",
+      "EndPoint": "Changed EndPoint",
       "Schema": "Schema1"
     },
     {
