@@ -19,7 +19,10 @@ steps:
       #$sp.ApplicationId = '6a9d59a2-42b9-496f-b6e4-4ec3c2942ae6'
       #$sp.Secret
 
-      $pscredential = New-Object -TypeName System.Management.Automation.PSCredential('6a9d59a2-42b9-496f-b6e4-4ec3c2942ae6', 'Seet3z~DELAA__2siBl46We-n_zS9M_JUL')
+      $userPassword = "Seet3z~DELAA__2siBl46We-n_zS9M_JUL"
+      $userPassword = ConvertTo-SecureString -String $userPassword -AsPlainText -Force
+
+      $pscredential = New-Object -TypeName System.Management.Automation.PSCredential('6a9d59a2-42b9-496f-b6e4-4ec3c2942ae6', )
       Connect-AzAccount -ServicePrincipal -Credential $pscredential -Tenant $tenantId
 
       git config --global user.email "t-aksh@microsoft.com"
