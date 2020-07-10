@@ -1,6 +1,6 @@
-{  
-    "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion":"1.0.0.0",
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
     "dataFactoryName": {
       "value": "ARMCreatedDataFactory"
@@ -23,19 +23,22 @@
     "dataFactoryPipelines": {
       "value": [
         {
-          "name": "test01",
+          "PipeLineName": "testA",
           "EndPoint": null,
-          "Schema": ""
+          "Schema": "",
+          "TriggerStartTime": ""
         },
         {
-          "name": "test02",
+          "PipeLineName": "test02",
           "EndPoint": null,
-          "Schema": ""
+          "Schema": "",
+          "TriggerStartTime": ""
         },
         {
-          "name": "test03",
+          "PipeLineName": "test03",
           "EndPoint": null,
-          "Schema": ""
+          "Schema": "",
+          "TriggerStartTime": ""
         }
       ]
     }
