@@ -1,12 +1,22 @@
 {
   "resources": [
     {
-      "EndPoint": "New EndPoint",
-      "Schema": "Schema1"
+      "PipeLineName": "testA",
+      "EndPoint": null,
+      "Schema": "",
+      "TriggerStartTime": ""
     },
     {
-      "EndPoint": "Endpoint2",
-      "Schema": "Schema2"
+      "PipeLineName": "test02",
+      "EndPoint": null,
+      "Schema": "",
+      "TriggerStartTime": ""
+    },
+    {
+      "PipeLineName": "test03",
+      "EndPoint": null,
+      "Schema": "",
+      "TriggerStartTime": ""
     }
   ]
 }
