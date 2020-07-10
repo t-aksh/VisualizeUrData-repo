@@ -42,6 +42,6 @@ steps:
 
       $ConfigFile.resources[0].EndPoint = "EndP_Changed"
       $ParameterFile.parameters.dataFactoryPipelines.value = $ConfigFile.resources
-
+      
 
       #New-AzResourceGroupDeployment -Name MyARMDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile CreateWebApp/ADFTutorialARM.json -TemplateParameterFile CreateWebApp/ADFTutorialARM-Parameters.json
