@@ -36,6 +36,10 @@
       "metadata": {
         "description": "End time for the trigger."
       }
+    },
+    "dataFactoryPipelines": {
+      "type": "array",
+      "defaultValue": []
     }
   },
   "variables": {
@@ -120,76 +124,8 @@
             "[parameters('dataFactoryName')]",
             "[concat(variables('factoryId'), '/linkedServices/ArmtemplateStorageLinkedService')]"
           ]
-        },
-        {
-          "name": "[concat(parameters('dataFactoryName'), '/ArmtemplateSampleCopyPipeline')]",
-          "type": "Microsoft.DataFactory/factories/pipelines",
-          "apiVersion": "2018-06-01",
-          "properties": {
-            "activities": [
-              {
-                "name": "NewActivity",
-                "type": "Copy",
-                "dependsOn": [
-
-                ],
-                "policy": {
-                  "timeout": "7.00:00:00",
-                  "retry": 0,
-                  "retryIntervalInSeconds": 30,
-                  "secureOutput": false,
-                  "secureInput": false
-                },
-                "userProperties": [
-
-                ],
-                "typeProperties": {
-                  "source": {
-                    "type": "BinarySource",
-                    "storeSettings": {
-                      "type": "AzureBlobStorageReadSettings",
-                      "recursive": true
-                    }
-                  },
-                  "sink": {
-                    "type": "BinarySink",
-                    "storeSettings": {
-                      "type": "AzureBlobStorageWriteSettings"
-                    }
-                  },
-                  "enableStaging": false
-                },
-                "inputs": [
-                  {
-                    "referenceName": "ArmtemplateTestDatasetIn",
-                    "type": "DatasetReference",
-                    "parameters": {
-
-                    }
-                  }
-                ],
-                "outputs": [
-                  {
-                    "referenceName": "ArmtemplateTestDatasetOut",
-                    "type": "DatasetReference",
-                    "parameters": {
-
-                    }
-                  }
-                ]
-              }
-            ],
-            "annotations": [
-
-            ]
-          },
-          "dependsOn": [
-            "[parameters('dataFactoryName')]",
-            "[concat(variables('factoryId'), '/datasets/ArmtemplateTestDatasetIn')]",
-            "[concat(variables('factoryId'), '/datasets/ArmtemplateTestDatasetOut')]"
-          ]
-        },
-        {
+        }
+        /*{
           "name": "[concat(parameters('dataFactoryName'), '/ArmTemplateTestTrigger')]",
           "type": "Microsoft.DataFactory/factories/triggers",
           "apiVersion": "2018-06-01",
@@ -224,7 +160,80 @@
             "[parameters('dataFactoryName')]",
             "[concat(variables('factoryId'), '/pipelines/ArmtemplateSampleCopyPipeline')]"
           ]
-        }
+        }*/
+      ]
+    },
+    {
+      "name": "[concat(parameters('dataFactoryName'), '/', 'TestVal', copyIndex())]",
+      "type": "Microsoft.DataFactory/factories/pipelines",
+      "apiVersion": "2018-06-01",
+      "copy": {
+        "name": "dataFactoryName",
+        "count": "[length(parameters('dataFactoryPipelines'))]"
+      },
+      "properties": {
+        "activities": [
+          {
+            "name": "CopyActivity",
+            "type": "Copy",
+            "dependsOn": [
+
+            ],
+            "policy": {
+              "timeout": "7.00:00:00",
+              "retry": 0,
+              "retryIntervalInSeconds": 30,
+              "secureOutput": false,
+              "secureInput": false
+            },
+            "userProperties": [
+
+            ],
+            "typeProperties": {
+              /*"source": {
+                "type": "BinarySource",
+                "storeSettings": {
+                  "type": "AzureBlobStorageReadSettings",
+                  "recursive": true
+                }
+              },
+              "sink": {
+                "type": "BinarySink",
+                "storeSettings": {
+                  "type": "AzureBlobStorageWriteSettings"
+                }
+              },
+              "enableStaging": false*/
+            },
+            "inputs": [
+              {
+                "referenceName": "ArmtemplateTestDatasetIn",
+                "type": "DatasetReference",
+                "parameters": {
+
+                }
+              }
+            ],
+            "outputs": [
+              {
+                "referenceName": "ArmtemplateTestDatasetOut",
+                "type": "DatasetReference",
+                "parameters": {
+
+                }
+              }
+            ]
+          }
+        ],
+        "annotations": [
+
+        ]
+      },
+      "dependsOn": [
+        "[parameters('dataFactoryName')]"
+        //"[parameters('dataFactoryPipelines')]"
+        //"[concat(variables('factoryId'), '/datasets/ArmtemplateTestDatasetIn')]",
+        //"[concat(variables('factoryId'), '/datasets/ArmtemplateTestDatasetOut')]"
       ]
     }
   ]

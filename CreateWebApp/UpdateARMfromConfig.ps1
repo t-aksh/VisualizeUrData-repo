@@ -5,11 +5,6 @@ $ARMtemplate = ( Get-Content -Raw -Path C:\Users\t-aksh\Documents\Internship_pro
 ConvertFrom-Json -depth 32 )
 $ARMResources = $ARMtemplate.resources.resources
 
-#Write-Host "Done"
-#set-content 'C:\Users\t-aksh\Documents\Internship_project\VizUrDataRepo\CreateWebApp\ADFTutorialARM.json'
-#$SomeRandomVar = $ARMtemplate.resources.resources
-#Write-Host $SomeRandomVar
-
 $DataFactoryPipeline =@"
 	{
 	  "name": "PushedPipeline",
