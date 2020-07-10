@@ -15,6 +15,7 @@ pool:
 
 steps:
 - checkout: self
+
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -36,16 +37,11 @@ steps:
       $contents = Get-Content -Raw -Path CreateWebApp/Config.json | ConvertFrom-Json
       $ARMtemplate = Get-Content -Raw -Path CreateWebApp/ADFTutorialARM.json | ConvertFrom-Json
       $ARMParameters = Get-Content -Raw -Path CreateWebApp/ADFTutorialARM-Parameters.json | ConvertFrom-Json
+      $ConfigFile = ( Get-Content -Raw -Path CreateWebApp/Config.json | ConvertFrom-Json -depth 32 )
+      $ParameterFile = ( Get-Content -Raw -Path CreateWebApp/ADFTutorialARM-Parameters.json | ConvertFrom-Json -depth 32 )
 
-      $DataFactoryPipeline = @"
-      {
-        "name": "PushedPipeline",
-        "type": "Microsoft.DataFactory/factories/pipelines"
-      }
-      "@
-      
-      $contents[0].resources[0].EndPoint = "Changed EndPoint"
-      $contents | ConvertTo-Json | set-content CreateWebApp/Config.json
-      #$ARMtemplate.resources += (ConvertFrom-Json -InputObject $DataFactoryPipeline)
+      $ConfigFile.resources[0].EndPoint = "EndP_Changed"
+      $ParameterFile.parameters.dataFactoryPipelines.value = $ConfigFile.resources
 
-      New-AzResourceGroupDeployment -Name MyARMDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile CreateWebApp/ADFTutorialARM.json -TemplateParameterFile CreateWebApp/ADFTutorialARM-Parameters.json
+
+      #New-AzResourceGroupDeployment -Name MyARMDeployment -ResourceGroupName Intern_Akash_RG -TemplateFile CreateWebApp/ADFTutorialARM.json -TemplateParameterFile CreateWebApp/ADFTutorialARM-Parameters.json
