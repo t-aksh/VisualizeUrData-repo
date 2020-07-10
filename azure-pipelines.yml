@@ -8,7 +8,7 @@ trigger:
   branches:
     include: [ master ]
   paths:
-    exclude: [CreateWebApp/Config.json]
+    exclude: [CreateWebApp/ADFTutorialARM-Parameters.json]
 
 pool:
   vmImage: 'ubuntu-latest'
